@@ -9,7 +9,8 @@ DESC
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Olivier Scalais' => 'olivier@codify.be' }
   s.ios.deployment_target = '13.0'
-  s.source_files = 'Workmanager/Classes/**/*'
+  s.source           = { :path => '.' }
+  s.source_files     = 'Workmanager/Classes/**/*'
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
