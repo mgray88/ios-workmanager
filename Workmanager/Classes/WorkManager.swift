@@ -14,8 +14,8 @@ public class WorkManager {
 
     // MARK: Registering
 
-    public func registerTask(withIdentifier identifier: String, onTrigger: @escaping (BGTask) -> ()) {
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: identifier, using: nil) { task in
+    public func registerTask(withIdentifier identifier: String, onTrigger: @escaping (BGTask) -> ()) -> Bool {
+        return BGTaskScheduler.shared.register(forTaskWithIdentifier: identifier, using: nil) { task in
             onTrigger(task)
         }
     }
@@ -24,6 +24,7 @@ public class WorkManager {
 
     public func scheduleOneOffTask(withIdentifier identifier: String,
                                            name: String,
+                                           type: TaskType,
                                            initialDelay: TimeInterval = 0.0,
                                            backoffPolicyDelay: TimeInterval = 900.0,
                                            tag: String? = nil,
@@ -31,11 +32,23 @@ public class WorkManager {
                                            constraints: [Constraints]? = nil,
                                            backoffPolicy: BackoffPolicy? = nil,
                                            inputData: String? = nil) throws {
-        try createTask(withIdentifier: identifier, name: name, frequency: nil, initialDelay: initialDelay, backoffPolicyDelay: backoffPolicyDelay, tag: tag, existingWorkPolicy: existingWorkPolicy, constraints: constraints, backoffPolicy: backoffPolicy, inputData: inputData)
+
+        try createTask(withIdentifier: identifier,
+                       name: name,
+                       type: type,
+                       frequency: nil,
+                       initialDelay: initialDelay,
+                       backoffPolicyDelay: backoffPolicyDelay,
+                       tag: tag,
+                       existingWorkPolicy: existingWorkPolicy,
+                       constraints: constraints,
+                       backoffPolicy: backoffPolicy,
+                       inputData: inputData)
     }
 
     public func schedulePeriodicTask(withIdentifier identifier: String,
                                                 name: String,
+                                                type: TaskType,
                                                 frequency: TimeInterval,
                                                 initialDelay: TimeInterval = 0.0,
                                                 backoffPolicyDelay: TimeInterval = 900.0,
@@ -44,7 +57,18 @@ public class WorkManager {
                                                 constraints: [Constraints]? = nil,
                                                 backoffPolicy: BackoffPolicy? = nil,
                                                 inputData: String? = nil) throws {
-        try createTask(withIdentifier: identifier, name: name, frequency: frequency, initialDelay: initialDelay, backoffPolicyDelay: backoffPolicyDelay, tag: tag, existingWorkPolicy: existingWorkPolicy, constraints: constraints, backoffPolicy: backoffPolicy, inputData: inputData)
+
+        try createTask(withIdentifier: identifier,
+                       name: name,
+                       type: type,
+                       frequency: frequency,
+                       initialDelay: initialDelay,
+                       backoffPolicyDelay: backoffPolicyDelay,
+                       tag: tag,
+                       existingWorkPolicy: existingWorkPolicy,
+                       constraints: constraints,
+                       backoffPolicy: backoffPolicy,
+                       inputData: inputData)
     }
 
     // MARK: Callbacks
@@ -78,6 +102,7 @@ public class WorkManager {
         let previousTask = scheduledTask.task
         try createTask(withIdentifier: previousTask.identifier,
                            name: previousTask.name,
+                           type: previousTask.type,
                            frequency: previousTask.frequency,
                            initialDelay: previousTask.frequency!,
                            backoffPolicyDelay: previousTask.backoffPolicyDelay,
@@ -113,6 +138,7 @@ public class WorkManager {
 
         try createTask(withIdentifier: newTask.identifier,
                            name: newTask.name,
+                           type: newTask.type,
                            frequency: newTask.frequency,
                            initialDelay: newTask.frequency!,
                            backoffPolicyDelay: newTask.backoffPolicyDelay,

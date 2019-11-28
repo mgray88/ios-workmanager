@@ -2,6 +2,7 @@ protocol TaskRepresentable: Equatable {
 
     var identifier: String { get }
     var name: String { get }
+    var type: TaskType { get }
     var initialDelay: TimeInterval { get }
     var backoffPolicyDelay: TimeInterval { get }
     var tag: String? { get }

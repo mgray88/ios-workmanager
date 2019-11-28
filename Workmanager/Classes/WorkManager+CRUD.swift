@@ -6,6 +6,7 @@ extension WorkManager {
 
     internal func createTask(withIdentifier identifier: String,
                             name: String,
+                            type: TaskType,
                             frequency: TimeInterval?,
                             initialDelay: TimeInterval,
                             backoffPolicyDelay: TimeInterval,
@@ -25,6 +26,7 @@ extension WorkManager {
 
         let task = Task(identifier: identifier,
                         name: name,
+                        type: type,
                         initialDelay: initialDelay,
                         backoffPolicyDelay: backoffPolicyDelay,
                         tag: tag,

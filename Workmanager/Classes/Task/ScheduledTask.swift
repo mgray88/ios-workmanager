@@ -8,4 +8,5 @@ struct ScheduledTask: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(task)
     }
+
 }

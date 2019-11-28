@@ -1,7 +1,7 @@
 public struct Task: TaskRepresentable, Hashable {
-
     var identifier: String
     var name: String
+    var type: TaskType
     var initialDelay: TimeInterval
     var backoffPolicyDelay: TimeInterval
     var tag: String?
@@ -17,6 +17,7 @@ public struct Task: TaskRepresentable, Hashable {
 
     public init(identifier: String,
                 name: String,
+                type: TaskType,
                 initialDelay: TimeInterval,
                 backoffPolicyDelay: TimeInterval,
                 tag: String? = nil,
@@ -27,6 +28,7 @@ public struct Task: TaskRepresentable, Hashable {
                 inputData: String? = nil) {
         self.identifier = identifier
         self.name = name
+        self.type = type
         self.initialDelay = initialDelay
         self.backoffPolicyDelay = backoffPolicyDelay
         self.tag = tag
