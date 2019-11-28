@@ -4,43 +4,6 @@ extension WorkManager {
 
     // MARK: CRUD
 
-    internal func createTask(withIdentifier identifier: String,
-                            name: String,
-                            type: TaskType,
-                            frequency: TimeInterval?,
-                            initialDelay: TimeInterval,
-                            backoffPolicyDelay: TimeInterval,
-                            tag: String?,
-                            existingWorkPolicy: ExistingWorkPolicy?,
-                            constraints: [Constraints]?,
-                            backoffPolicy: BackoffPolicy?,
-                            inputData: String?) throws {
-        if let existingWorkPolicy = existingWorkPolicy, let _ = getScheduledTask(withIdentifier: identifier) {
-            switch existingWorkPolicy {
-            case .keep:
-                return
-            case .replace:
-                cancelTask(withIdentifier: identifier)
-            }
-        }
-
-        let task = Task(identifier: identifier,
-                        name: name,
-                        type: type,
-                        initialDelay: initialDelay,
-                        backoffPolicyDelay: backoffPolicyDelay,
-                        tag: tag,
-                        frequency: frequency,
-                        existingWorkPolicy: existingWorkPolicy,
-                        constraints: constraints,
-                        backoffPolicy: backoffPolicy,
-                        inputData: inputData)
-
-        try scheduler.scheduleTask(task) { request in
-            scheduledTasks.insert(ScheduledTask(task: task, request: request))
-        }
-    }
-
     internal func getScheduledTask(forCompletedTask completedTask: BGTask) -> ScheduledTask? {
         return scheduledTasks.first { $0.task.identifier == completedTask.identifier }
     }
