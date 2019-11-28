@@ -25,6 +25,7 @@ public class WorkManager {
     public func schedule(task: Task) throws {
         if let existingWorkPolicy = task.existingWorkPolicy,
             let _ = getScheduledTask(withIdentifier: task.identifier) {
+            
             switch existingWorkPolicy {
             case .keep:
                 return
