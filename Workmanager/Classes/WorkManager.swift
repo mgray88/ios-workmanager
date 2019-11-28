@@ -74,25 +74,23 @@ public class WorkManager {
     // MARK: Error handlers
     
     private func handleError(withScheduledTask scheduledTask: ScheduledTask) throws {
-        let previousTask = scheduledTask.task
-        
-        guard let backoffPolicy = previousTask.backoffPolicy else { return }
-        
-        var newTask = previousTask
+        var task = scheduledTask.task
+        guard let backoffPolicy = task.backoffPolicy else { return }
+
         var delay = 0.0
         
         switch backoffPolicy {
             case .linear:
-                delay = previousTask.initialDelay + previousTask.backoffPolicyDelay
+                delay = task.initialDelay + task.backoffPolicyDelay
             case .exponential:
-                if previousTask.initialDelay == 0.0 {
-                    delay = previousTask.backoffPolicyDelay
+                if task.initialDelay == 0.0 {
+                    delay = task.backoffPolicyDelay
                 } else {
-                    delay = pow(previousTask.initialDelay, 2)
+                    delay = pow(task.initialDelay, 2)
             }
         }
         
-        newTask.initialDelay = delay
-        try schedule(task: newTask)
+        task.initialDelay = delay
+        try schedule(task: task)
     }
 }
