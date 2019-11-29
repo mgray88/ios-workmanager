@@ -1,4 +1,7 @@
 import BackgroundTasks
+import SwiftyBeaver
+
+let log = SwiftyBeaver.self
 
 public class WorkManager {
 
@@ -27,6 +30,7 @@ public class WorkManager {
     // MARK: Scheduling
 
     public func schedule(task: Task) throws {
+        log.info("enter 'schedule(task:)'")
         if let existingWorkPolicy = task.existingWorkPolicy,
             let _ = getScheduledTask(withIdentifier: task.identifier) {
 
@@ -46,6 +50,7 @@ public class WorkManager {
     // MARK: Callbacks
 
     public func finish(task: BGTask, success: Bool) throws {
+        log.info("enter 'finish(task:success:)'")
         task.setTaskCompleted(success: success)
 
         guard let scheduledTask = getScheduledTask(forCompletedTask: task) else {
@@ -63,11 +68,14 @@ public class WorkManager {
     // MARK: Success handlers
 
     private func handleSuccess(withScheduledTask scheduledTask: ScheduledTask) throws {
+        log.info("enter 'handleSuccess(withScheduledTask scheduledTask:)'")
         if scheduledTask.task.isPeriodic {
+            log.info("processing periodic task")
             let task = scheduledTask.task
             try schedule(task: task)
 
         } else {
+            log.info("processing non periodic task")
             removeScheduledTask(scheduledTask)
         }
     }

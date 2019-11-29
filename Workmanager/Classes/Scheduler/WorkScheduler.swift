@@ -14,7 +14,8 @@ class WorkScheduler {
                     .build()
 
             case .refresh:
-                request = AppRefreshRequestBuilder(identifier: task.identifier).build()
+                request = AppRefreshRequestBuilder(identifier: task.identifier)
+                    .build()
         }
 
         try submitRequest(request)

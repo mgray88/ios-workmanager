@@ -40,7 +40,7 @@ public struct Task: TaskRepresentable, Hashable {
         self.inputData = inputData
     }
     
-    /// Creates and returns a default Task instance dedicated for scheduling.
+    /// Creates and returns a default Task object dedicated for being executed only once.
     /// - Parameters:
     ///   - identifier: A unique identifier which must be registered by setting BGTaskSchedulerPermittedIdentifiers in your Info.plist.
     ///   - name: A name for the task.
@@ -51,7 +51,7 @@ public struct Task: TaskRepresentable, Hashable {
         self.init(identifier: identifier, name: name, type: type, frequency: 0.0)
     }
     
-    /// Creates and returns a default Task instance dedicated for scheduling.
+    /// Creates and returns a default Task object dedicated for scheduling with a given frequency.
     /// - Parameters:
     ///   - identifier: A unique identifier which must be registered by setting BGTaskSchedulerPermittedIdentifiers in your Info.plist.
     ///   - name: A name for the task.

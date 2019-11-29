@@ -11,6 +11,7 @@ Pod::Spec.new do |s|
   s.source_files        = 'Workmanager/Classes/**/*'
 
   s.dependency 'Flutter'
+  s.dependency 'SwiftyBeaver'
 
   s.ios.deployment_target = '13.0'
 
