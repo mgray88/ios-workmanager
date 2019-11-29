@@ -12,8 +12,8 @@ public struct Task: TaskRepresentable, Hashable {
     var inputData: String?
     var frequency: TimeInterval?
     var isPeriodic: Bool {
-        guard frequency != nil else { return false}
-        return true
+        guard let frequency = self.frequency else { return false}
+        return frequency > 0
     }
 
     public init(identifier: String,
