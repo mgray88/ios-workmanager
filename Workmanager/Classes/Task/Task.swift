@@ -1,7 +1,7 @@
 public struct Task: TaskRepresentable, Hashable {
 
     var identifier: String
-    var name: String
+    var name: String?
     var type: TaskType
     var initialDelay: TimeInterval
     var backoffPolicyDelay: TimeInterval
@@ -17,7 +17,7 @@ public struct Task: TaskRepresentable, Hashable {
     }
 
     public init(identifier: String,
-                name: String,
+                name: String?,
                 type: TaskType,
                 initialDelay: TimeInterval = 0.0,
                 backoffPolicyDelay: TimeInterval = 900.0,
@@ -47,7 +47,7 @@ public struct Task: TaskRepresentable, Hashable {
     ///   - type: A value which describes the type of your task. There are only two allowed values: `.processing` for long running tasks and `.refresh` for short running tasks (max. 30 seconds).
     ///
     /// - Returns: An preconfigured instance of `Task` which is ready for use.
-    public init(oneOffTaskWithIdentifier identifier: String, name: String, type: TaskType = .refresh) {
+    public init(oneOffTaskWithIdentifier identifier: String, name: String? = nil, type: TaskType = .refresh) {
         self.init(identifier: identifier, name: name, type: type, frequency: 0.0)
     }
     
@@ -59,7 +59,7 @@ public struct Task: TaskRepresentable, Hashable {
     ///   - type: A value which describes the type of your task. There are only two allowed values: `.processing` for long running tasks and `.refresh` for short running tasks (max. 30 seconds).
     ///
     /// - Returns: An preconfigured instance of `Task` which is ready for use.
-    public init(periodicTaskWithIdentifier identifier: String, name: String, type: TaskType = .refresh, frequency: TimeInterval = 15 * 60.0) {
+    public init(periodicTaskWithIdentifier identifier: String, name: String? = nil, type: TaskType = .refresh, frequency: TimeInterval = 15 * 60.0) {
         self.init(identifier: identifier, name: name, type: type, frequency: frequency)
     }
 
