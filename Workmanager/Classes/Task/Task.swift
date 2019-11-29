@@ -44,7 +44,7 @@ public struct Task: TaskRepresentable, Hashable {
     /// - Parameters:
     ///   - identifier: A unique identifier which must be registered by setting BGTaskSchedulerPermittedIdentifiers in your Info.plist.
     ///   - name: A name for the task.
-    ///   - type: A value which describes the type of your task. There are only two allowed values: `.processing` for long running tasks and `.refresh` for short running tasks (max. 30 seconds).
+    ///   - type: A value which describes the type of your task. There are only two allowed values: `.processing` for long running tasks and `.refresh` for short running tasks (max. 30 seconds). Default value is `.refresh`.
     ///
     /// - Returns: An preconfigured instance of `Task` which is ready for use.
     public init(oneOffTaskWithIdentifier identifier: String, name: String? = nil, type: TaskType = .refresh) {
@@ -55,8 +55,8 @@ public struct Task: TaskRepresentable, Hashable {
     /// - Parameters:
     ///   - identifier: A unique identifier which must be registered by setting BGTaskSchedulerPermittedIdentifiers in your Info.plist.
     ///   - name: A name for the task.
-    ///   - frequency: A value in seconds your task should be scheduled.
-    ///   - type: A value which describes the type of your task. There are only two allowed values: `.processing` for long running tasks and `.refresh` for short running tasks (max. 30 seconds).
+    ///   - frequency: A value in seconds your task should be scheduled. Default value is 900 seconds (15 minutes).
+    ///   - type: A value which describes the type of your task. There are only two allowed values: `.processing` for long running tasks and `.refresh` for short running tasks (max. 30 seconds). Default value is `.refresh`.
     ///
     /// - Returns: An preconfigured instance of `Task` which is ready for use.
     public init(periodicTaskWithIdentifier identifier: String, name: String? = nil, type: TaskType = .refresh, frequency: TimeInterval = 15 * 60.0) {
