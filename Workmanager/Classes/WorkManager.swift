@@ -51,7 +51,6 @@ public class WorkManager {
 
     public func finish(task: BGTask, success: Bool) throws {
         log.info("enter 'finish(task:success:)'")
-        task.setTaskCompleted(success: success)
 
         guard let scheduledTask = getScheduledTask(forCompletedTask: task) else {
             return
@@ -59,10 +58,12 @@ public class WorkManager {
 
         guard success else {
             try handleError(withScheduledTask: scheduledTask)
+            task.setTaskCompleted(success: success)
             return
         }
 
         try handleSuccess(withScheduledTask: scheduledTask)
+        task.setTaskCompleted(success: success)
     }
 
     // MARK: Success handlers
