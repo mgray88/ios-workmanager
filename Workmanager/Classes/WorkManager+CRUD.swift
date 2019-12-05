@@ -21,22 +21,22 @@ extension WorkManager {
     }
 
     internal func removeScheduledTask(_ scheduledTask: ScheduledTask) {
-        log.info("enter 'removeScheduledTask(scheduledTask:)'")
         if scheduledTasks.contains(scheduledTask) {
+            log.info("removeScheduledTask(scheduledTask:)")
             scheduledTasks.remove(scheduledTask)
         }
     }
 
     internal func removeScheduledTask(withIdentifier identifier: String) {
-        log.info("enter 'removeScheduledTask(withIdentifier identifier:)'")
         if let scheduledTask = getScheduledTask(withIdentifier: identifier) {
+            log.info("removeScheduledTask(withIdentifier identifier:)")
             removeScheduledTask(scheduledTask)
         }
     }
 
     internal func removeScheduledTask(withTag tag: String) {
-        log.info("enter 'removeScheduledTask(withTag tag:)'")
         if let scheduledTask = getScheduledTask(withTag: tag) {
+            log.info("removeScheduledTask(withTag tag:)")
             removeScheduledTask(scheduledTask)
         }
     }
