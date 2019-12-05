@@ -17,11 +17,11 @@ public class WorkManager {
 
     // MARK: Registering
     
-    public func registerTask(withIdentifier identifier: String, onTrigger: @escaping (BGTask) -> ()) -> Bool {
+    public static func registerTask(withIdentifier identifier: String, onTrigger: @escaping (BGTask) -> ()) -> Bool {
         return registerTask(withIdentifier: identifier, using: nil, onTrigger: onTrigger)
     }
     
-    public func registerTask(withIdentifier identifier: String, using queue: DispatchQueue?, onTrigger: @escaping (BGTask) -> ()) -> Bool {
+    public static func registerTask(withIdentifier identifier: String, using queue: DispatchQueue?, onTrigger: @escaping (BGTask) -> ()) -> Bool {
         return BGTaskScheduler.shared.register(forTaskWithIdentifier: identifier, using: queue) { task in
             onTrigger(task)
         }
