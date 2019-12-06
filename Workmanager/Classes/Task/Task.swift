@@ -1,17 +1,17 @@
 public struct Task: TaskRepresentable, Hashable {
 
-    var identifier: String
-    var name: String?
-    var type: TaskType
-    var initialDelay: TimeInterval
-    var backoffPolicyDelay: TimeInterval
-    var tag: String?
-    var existingWorkPolicy: ExistingWorkPolicy?
-    var constraints: [Constraints]?
-    var backoffPolicy: BackoffPolicy?
-    var inputData: String?
-    var frequency: TimeInterval?
-    var isPeriodic: Bool {
+    public var identifier: String
+    public var name: String?
+    public var type: TaskType
+    public var initialDelay: TimeInterval
+    public var backoffPolicyDelay: TimeInterval
+    public var tag: String?
+    public var existingWorkPolicy: ExistingWorkPolicy?
+    public var constraints: [Constraints]?
+    public var backoffPolicy: BackoffPolicy?
+    public var inputData: String?
+    public var frequency: TimeInterval?
+    public var isPeriodic: Bool {
         guard let frequency = self.frequency else { return false}
         return frequency > 0
     }
