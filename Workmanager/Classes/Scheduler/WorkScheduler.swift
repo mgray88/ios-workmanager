@@ -15,6 +15,7 @@ class WorkScheduler {
 
             case .refresh:
                 request = AppRefreshRequestBuilder(identifier: task.identifier)
+                    .appendInitialDelay(task.initialDelay)
                     .build()
         }
 
