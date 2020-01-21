@@ -5,7 +5,11 @@ extension WorkManager {
     // MARK: CRUD
 
     internal func getScheduledTask(forCompletedTask completedTask: BGTask) -> ScheduledTask? {
-        return scheduledTasks.first { $0.task.identifier == completedTask.identifier }
+        let scheduledTask = scheduledTasks.first { scheduledTask -> Bool in
+            scheduledTask.task.identifier == completedTask.identifier
+        }
+        return scheduledTask
+//        return scheduledTasks.first { $0.task.identifier == completedTask.identifier }
     }
 
     internal func getScheduledTask(withIdentifier identifier: String) -> ScheduledTask? {
